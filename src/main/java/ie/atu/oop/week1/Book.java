@@ -18,4 +18,18 @@ public class Book {
         System.out.println("The status of this book is " + available);
         System.out.println("\n");
     }
+
+    public void borrowBook()
+    {
+        if (available)
+        {
+            available = false;
+            System.out.println(title + " borrowed successfully");
+        }
+        else
+        {
+            System.out.println(title + " is not available");
+        }
+
+    }
 }
