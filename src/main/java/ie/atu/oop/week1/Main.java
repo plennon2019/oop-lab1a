@@ -2,28 +2,32 @@ package ie.atu.oop.week1;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args)
-    {
-        System.out.println("Hello OOP");
+public class Main
+{
+    public static void main(String[] args) {
 
-        Book firstBook = new Book();
-        firstBook.title = "Dune";
-        firstBook.author = "Frank Herbert";
-        firstBook.pageCount = 412;
+        Book first = new Book("Dune","Frank Herbert",412);
 
-        firstBook.displayDetails();
-        System.out.println("\n");
-        firstBook.borrowBook();
-        System.out.println("\n");
-        firstBook.displayDetails();
+        Book second = new Book("Clean Code","Robert C. Martin",464);
 
-        Book secondBook = new Book();
-        secondBook.title = "The life and times of Thunderbolt";
-        secondBook.author = "Frank Black";
-        secondBook.pageCount = 12;
-        secondBook.available = true;
+        LibraryService service = new LibraryService();
 
-        secondBook.displayDetails();
+        System.out.println(first.getStatus());
+
+        service.loanBook(first, 7);
+        System.out.println(first.getStatus());
+
+        service.returnBook(first);
+        System.out.println(first.getStatus());
+
+        System.out.println(second.getStatus());
+
+        try {
+            service.loanBook(first, 15);
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println(first.getStatus());
     }
 }
