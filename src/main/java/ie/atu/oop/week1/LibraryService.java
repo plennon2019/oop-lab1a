@@ -1,8 +1,12 @@
 package ie.atu.oop.week1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LibraryService
 {
     private static final int MAX_LOAN_DAYS = 14;
+    private final List<Book> books = new ArrayList<>();
 
     public void loanBook(Book book, int loanDays) {
 
@@ -28,5 +32,44 @@ public class LibraryService
 
         book.returnBook();
     }
+    public void addBook(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book must not be null");
+        }
+        books.add(book);
+    }
+    public int getBookCount()
+    {
+        return books.size();
+    }
+
+    public List<Book> getAllBooks()
+    {
+        return new ArrayList<>(books);
+    }
+
+    public Book findBookByTitle(String title)
+    {
+        for (Book book : books)
+        {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book;
+            }
+
+        }
+        return null;
+    }
+    public boolean removeBook(String title)
+    {
+        Book book = findBookByTitle(title);
+        if (book != null) {
+            books.remove(book);
+            System.out.println(book.getTitle() + " has been removed");
+            return true;
+        }
+        System.out.println("Book not found");
+        return false;
+    }
+
 }
 
